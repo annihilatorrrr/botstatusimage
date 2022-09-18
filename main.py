@@ -37,8 +37,7 @@ def changeImageSize(maxWidth, maxHeight, image):
     heightRatio = maxHeight / image.size[1]
     newWidth = int(widthRatio * image.size[0])
     newHeight = int(heightRatio * image.size[1])
-    newImage = image.resize((newWidth, newHeight))
-    return newImage
+    return image.resize((newWidth, newHeight))
 
 
 async def main():
@@ -79,7 +78,6 @@ async def main():
                                 )
                             except Exception:
                                 pass
-                        await app.read_history(bot)
                     else:
                         logo = Image.open("images/up.jpg")
                         # imgffff = Image.open("temp.png")
@@ -89,12 +87,12 @@ async def main():
                         draw = ImageDraw.Draw(bg)
                         # font = ImageFont.truetype("font.ttf", 80)
                         draw.text((200, yax), f"{bot}", (26, 84, 174), font=font)
-                        await app.read_history(bot)
+                    await app.read_history(bot)
                 except FloodWait as e:
                     await asyncio.sleep(e.x)
             time = datetime.datetime.now(pytz.timezone(f"{TIME_ZONE}"))
 
-            last_update = time.strftime(f"%d %b %Y at %I:%M %p")
+            last_update = time.strftime("%d %b %Y at %I:%M %p")
             xxx_tg += f"\n\n✔️ Last updated on: {last_update} ({TIME_ZONE})\n\n<i>⇋ Updates every 45min - Powered by @NACBots</i>"
             bg.save("md.jpg")
             await app.edit_message_media(
